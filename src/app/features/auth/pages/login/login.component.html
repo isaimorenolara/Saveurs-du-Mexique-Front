@@ -1,0 +1,67 @@
+<section class="container section">
+    <div class="white-card register">
+        <header class="pp-head animate__animated animate__fadeInDown">
+            <h2 class="pp-title sub-brand m-0"><strong>Log in</strong></h2>
+        </header>
+
+        <section class="white-subcard">
+            <div class="login-grid">
+                <form class="row g-3 needs-validation" novalidate (ngSubmit)="onSubmit()">
+                    <div class="col-12">
+                        <label class="form-label" for="email">Email</label>
+                        <input id="email" name="email" class="form-control" type="email" required email
+                            autocomplete="email" inputmode="email"
+                            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[A-Za-z]{2,}$" [(ngModel)]="form.email"
+                            #emailCtrl="ngModel"
+                            [class.is-valid]="emailCtrl.valid && (emailCtrl.dirty || emailCtrl.touched)"
+                            [class.is-invalid]="emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)" />
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Enter a valid email.</div>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label" for="password">Password</label>
+                        <div class="input-group has-validation">
+                            <input id="password" name="password" class="form-control"
+                                [type]="showPwd ? 'text' : 'password'" required autocomplete="current-password"
+                                [(ngModel)]="form.password" #pwdCtrl="ngModel"
+                                [class.is-valid]="pwdCtrl.valid && (pwdCtrl.dirty || pwdCtrl.touched)"
+                                [class.is-invalid]="pwdCtrl.invalid && (pwdCtrl.dirty || pwdCtrl.touched)"
+                                (paste)="$event.preventDefault()" (copy)="$event.preventDefault()"
+                                (cut)="$event.preventDefault()" spellcheck="false" placeholder="••••••••" />
+                            <button type="button" class="btn btn-outline-secondary" (click)="showPwd = !showPwd"
+                                tabindex="-1">
+                                <i class="fa-solid" [class.fa-eye]="!showPwd" [class.fa-eye-slash]="showPwd"></i>
+                            </button>
+                            <div class="invalid-feedback">Password is required.</div>
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-flex align-items-center justify-content-between">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="remember" [(ngModel)]="remember"
+                                name="remember" />
+                            <label class="form-check-label" for="remember">Remember me</label>
+                        </div>
+                        <!-- <a class="link-small" routerLink="/auth/forgot-password">Forgot password?</a> -->
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-end gap-2">
+                        <a class="btn btn-ghost" routerLink="/auth/register">Create account</a>
+                        <button class="btn btn-primary" type="submit"
+                            [disabled]="!emailCtrl.valid || !pwdCtrl.valid || loading">
+                            {{ loading ? 'Signing in…' : 'Log in' }}
+                        </button>
+                    </div>
+
+                    <p class="text-danger mt-2" *ngIf="mensaje">{{ mensaje }}</p>
+                </form>
+
+                <div class="login-illu">
+                    <img [src]="loginImage" alt="Secure login" />
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
