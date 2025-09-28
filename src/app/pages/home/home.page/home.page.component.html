@@ -1,0 +1,43 @@
+<section class="container section">
+    <div class="white-card contact hero">
+        <div class="hero-art">
+            <h1 class="brand animate__animated animate__bounceIn">{{ brand }}</h1>
+            <img class="animate__animated animate__fadeInUp" [src]="heroImage" alt="Popular Mexican snacks collage"
+                draggable="false" />
+        </div>
+    </div>
+</section>
+
+<section class="container section">
+    <div class="white-card contact hero p-3">
+        <header class="pp-head text-center">
+            <h2 class="pp-title sub-brand m-0 animate__animated animate__heartBeat"><strong>Popular picks</strong></h2>
+        </header>
+        <!-- <div class="pp-scroller">
+            <article class="pp-card d-flex flex-column" *ngFor="let p of products">
+                <div class="pp-media">
+                    <img class="h-100" [src]="p.imageUrl" [alt]="p.name" draggable="false" />
+                    <span class="pp-tag" *ngIf="p.tag">{{ p.tag }}</span>
+                </div>
+                <div class="pp-body mt-auto">
+                    <h3 class="pp-name">{{ p.name }}</h3>
+                    <p class="pp-blurb">{{ p.blurb }}</p>
+                </div>
+            </article>
+        </div> -->
+        <div class="pp-scroller">
+            <article class="d-flex flex-column" *ngFor="let p of products">
+                <div class="ayuda-cards h-100">
+                    <div class="ayuda-cards-media d-flex justify-content-center align-items-center">
+                        <img class="h-100 p-3" [src]="p.imageUrl" [alt]="p.name" draggable="false" />
+                        <span class="pp-tag" *ngIf="p.tag">{{ p.tag }}</span>
+                    </div>
+                    <div class="card-body ayuda-cards-body">
+                        <h3 class="pp-name">{{ p.name }}</h3>
+                        <p class="pp-blurb">{{ p.blurb }}</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>

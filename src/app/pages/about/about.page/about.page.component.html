@@ -1,0 +1,54 @@
+<section class="container section">
+    <div class="white-card about">
+        <header class="pp-head animate__animated animate__fadeInDown">
+            <h2 class="pp-title sub-brand m-0"><strong>About</strong></h2>
+            <p class="pp-sub text-muted">Authentic Mexican flavors, shared with the world.</p>
+        </header>
+
+        <div class="hero-grid">
+            <div class="hero-copy animate__animated animate__fadeInUp">
+                <h3 class="sub-brand"><strong>Our mission</strong></h3>
+                <p>
+                    At <strong>Saveurs du Mexique</strong>, we curate small-batch sweets and artisanal goods from
+                    Mexico,
+                    partnering with family-owned makers and fair-trade initiatives.
+                </p>
+                <ul class="bullets">
+                    <li><i class="fa-solid fa-handshake icon"></i> Fair partnerships with local artisans</li>
+                    <li><i class="fa-solid fa-leaf icon"></i> Responsible sourcing & small batches</li>
+                    <li><i class="fa-solid fa-truck-fast icon"></i> Fresh, carefully handled shipping</li>
+                </ul>
+            </div>
+
+            <figure class="hero-media animate__animated animate__zoomIn">
+                <img class="blob blob-1" [src]="heroImg" alt="Friends enjoying Mexican sweets" loading="lazy" draggable="false" />
+            </figure>
+        </div>
+
+        <section class="values">
+            <article class="value animate__animated animate__fadeInUp" *ngFor="let v of values; trackBy: trackByTitle">
+                <div class="img-wrap">
+                    <img class="blob" [ngClass]="v.blobClass" [src]="v.img" [alt]="v.title" loading="lazy" draggable="false" />
+                </div>
+                <h4 class="sub-brand p-2"><strong>{{ v.title }}</strong></h4>
+                <p class="text-muted">{{ v.copy }}</p>
+            </article>
+        </section>
+
+        <section class="white-subcard quote animate__animated animate__fadeIn">
+            <blockquote>
+                “We started with weekend markets and a suitcase full of dulces. Today we connect artisans to
+                sweet-lovers across borders — without losing the soul of each recipe.”
+            </blockquote>
+            <cite>— Saveurs du Mexique</cite>
+        </section>
+
+        <section class="white-subcard cta animate__animated animate__fadeInUp">
+            <h4 class="sub-brand p-2"><strong>Ready to taste Mexico?</strong></h4>
+            <p class="text-muted">Discover our curated boxes and seasonal sweets.</p>
+            <div class="cta-actions">
+                <a routerLink="/contact" class="btn-primary" routerLinkActive="active">Contact us</a>
+            </div>
+        </section>
+    </div>
+</section>

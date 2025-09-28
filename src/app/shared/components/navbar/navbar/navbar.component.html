@@ -1,0 +1,35 @@
+<section class="container">
+    <header class="nav-card">
+        <a routerLink="/" class="brand" (click)="closeMenu()">
+            <img src="assets/images/logo.png" alt="Saveurs du Mexique" class="logo" />
+        </a>
+
+        <nav class="links">
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
+            <a routerLink="/about" routerLinkActive="active">About</a>
+            <a routerLink="/contact" routerLinkActive="active">Contact</a>
+        </nav>
+
+        <div class="actions">
+            <a routerLink="/auth/login" class="login">Log in</a>
+            <a routerLink="/auth/register" class="btn-primary">Sign up</a>
+        </div>
+
+        <button class="burger" aria-label="Open menu" aria-controls="mobileMenu" [attr.aria-expanded]="menuOpen"
+            type="button" (click)="toggleMenu()">
+            <span [class.open]="menuOpen"></span>
+        </button>
+    </header>
+
+    <nav id="mobileMenu" class="mobile" [ngClass]="{open: menuOpen}" *ngIf="menuOpen">
+        <a routerLink="/" (click)="closeMenu()" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact:true}">Home</a>
+        <a routerLink="/about" (click)="closeMenu()" routerLinkActive="active">About</a>
+        <a routerLink="/contact" (click)="closeMenu()" routerLinkActive="active">Contact</a>
+
+        <div class="mobile-actions">
+            <a routerLink="/auth/login" (click)="closeMenu()" class="login">Log in</a>
+            <a routerLink="/auth/register" (click)="closeMenu()" class="btn-primary block">Sign up</a>
+        </div>
+    </nav>
+</section>
