@@ -5,7 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 
 import { AuthApiService } from '../../../../core/services/auth-api.service';
-import { RegisterRequest, RegisterResponse } from '../../../../shared/models/auth';
+import { RegisterRequest, RegisterResponse, UserRole } from '../../../../shared/models/auth';
 
 @Component({
   selector: 'app-register',
@@ -21,9 +21,10 @@ export class RegisterComponent {
   showPwd = false;
   showConfirmPwd = false;
   confirm = '';
+  readonly UserRole = UserRole;
 
   register: RegisterRequest = {
-    account: { email: '', password: '', dob: '' },
+    account: { email: '', password: '', dob: '', role: UserRole.Customer },
     profile: { firstName: '', lastName: '' },
     address: { street: '', streetNumber: '', zip: '' },
   };

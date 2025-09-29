@@ -1,10 +1,12 @@
 import { ApiStatus } from './common.model';
+import { UserRole } from './role.model';
 
 export interface RegisterRequest {
     account: { 
         email: string; 
         password: string; 
-        dob: string
+        dob: string;
+        role: UserRole;
     };
     profile: { 
         firstName: string; 

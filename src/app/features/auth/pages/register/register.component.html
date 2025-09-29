@@ -73,6 +73,15 @@
                     <div class="invalid-feedback">You must be 18+.</div>
                 </div>
 
+                <div class="col-md-6">
+                    <label class="form-label" for="role">Role</label>
+                    <select id="role" name="role" class="form-select" [(ngModel)]="register.account.role">
+                        <option [ngValue]="UserRole.Customer">Customer</option>
+                        <option [ngValue]="UserRole.Seller">Seller</option>
+                    </select>
+                    <small class="text-muted">Admin accounts are assigned by staff.</small>
+                </div>
+
                 <div class="form-actions mt-3 d-flex justify-content-end gap-2">
                     <a routerLink="/auth/login" class="btn btn-ghost">I already have an account</a>
                     <button class="btn btn-primary" type="button" [disabled]="!validAccount" (click)="next()">
