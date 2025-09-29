@@ -32,10 +32,10 @@ export class LoginComponent {
 
     this.loading = true;
     this.api.login(this.form).subscribe({
-      next: (res: { response: LoginResponse }) => {
+      next: (res) => {
         this.loading = false;
 
-        const loginRes = res.response;
+        const loginRes = res;
         if (loginRes.status === 'success' && loginRes.token) {
           if (this.remember) {
             localStorage.setItem('token', loginRes.token);
@@ -48,7 +48,7 @@ export class LoginComponent {
             title: 'Welcome back!',
             timer: 1400,
             showConfirmButton: false,
-          }).then(() => this.router.navigate(['/products']));
+          }).then(() => this.router.navigate(['/']));
         } else {
           this.mensaje = 'Invalid credentials';
           Swal.fire({ icon: 'error', title: 'Login failed', text: this.mensaje });

@@ -70,18 +70,20 @@ export class RegisterComponent {
 
     this.loading = true;
     this.api.register(this.register).subscribe({
-      next: (res: { response: RegisterResponse }) => {
+      next: (res) => {
         this.loading = false;
 
-        if (res.response.status === 'success' && res.response.token) {
-          localStorage.setItem('token', res.response.token);
+        console.log("Status: "+res.status);
+
+        if (res.status === 'success' && res.token) {
+          localStorage.setItem('token', res.token);
           Swal.fire({
             icon: 'success',
             title: 'Registration successful',
             text: 'Your account has been created.',
             timer: 1800,
             showConfirmButton: false,
-          }).then(() => this.router.navigate(['/products']));
+          }).then(() => this.router.navigate(['/']));
         } else {
           this.mensaje = 'Registration failed';
           Swal.fire({ icon: 'error', title: 'Register failed', text: this.mensaje });

@@ -12,10 +12,14 @@ export class AuthApiService {
   constructor(private http: HttpClient) {}
 
   register(request: RegisterRequest) {
-    return this.http.post<{ response: RegisterResponse }>(`${this.apiUrl}/register`, request);
+    return this.http.post<RegisterResponse>(`${this.apiUrl}/sign-up`, request);
   }
 
   login(request: LoginRequest){
-    return this.http.post<{ response: LoginResponse }>(`${this.apiUrl}/login`, request);
+    return this.http.post<LoginResponse>(`${this.apiUrl}/sign-in`, request);
+  }
+
+  me() {
+    return this.http.get(`${environment.backendUrl}/me`);
   }
 }
