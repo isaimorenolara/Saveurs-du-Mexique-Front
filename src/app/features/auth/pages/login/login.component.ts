@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
+import { TokenService } from '../../../../core/services/token.service';
 import Swal from 'sweetalert2';
 
 import { AuthApiService } from '../../../../core/services/auth-api.service';
@@ -23,7 +24,12 @@ export class LoginComponent {
   loading = false;
   mensaje = '';
 
-  constructor(private api: AuthApiService, private router: Router) {}
+  constructor(
+    private api: AuthApiService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private token: TokenService
+  ) {}
 
   onSubmit() {
     const validEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/.test(this.form.email);
@@ -32,23 +38,19 @@ export class LoginComponent {
 
     this.loading = true;
     this.api.login(this.form).subscribe({
-      next: (res) => {
+      next: (res: LoginResponse) => {
         this.loading = false;
 
-        const loginRes = res;
-        if (loginRes.status === 'success' && loginRes.token) {
-          if (this.remember) {
-            localStorage.setItem('token', loginRes.token);
-          } else {
-            sessionStorage.setItem('token', loginRes.token);
-          }
+        if (res.status === 'success' && res.token) {
+          this.token.setToken(res.token, this.remember);
 
+          const nextUrl = this.route.snapshot.queryParamMap.get('next') || '/';
           Swal.fire({
             icon: 'success',
             title: 'Welcome back!',
             timer: 1400,
             showConfirmButton: false,
-          }).then(() => this.router.navigate(['/']));
+          }).then(() => this.router.navigateByUrl(nextUrl));
         } else {
           this.mensaje = 'Invalid credentials';
           Swal.fire({ icon: 'error', title: 'Login failed', text: this.mensaje });

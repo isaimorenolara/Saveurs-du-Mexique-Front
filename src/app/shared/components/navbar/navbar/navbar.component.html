@@ -1,18 +1,46 @@
 <section class="container">
     <header class="nav-card">
         <a routerLink="/" class="brand" (click)="closeMenu()">
-            <img src="assets/images/logo.png" alt="Saveurs du Mexique" class="logo" />
+            <img [src]="logoImage" alt="Saveurs du Mexique" class="logo" />
         </a>
 
         <nav class="links">
-            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
             <a routerLink="/about" routerLinkActive="active">About</a>
             <a routerLink="/contact" routerLinkActive="active">Contact</a>
         </nav>
 
-        <div class="actions">
+        <div class="actions desktop-only" *ngIf="!isLoggedIn">
             <a routerLink="/auth/login" class="login">Log in</a>
             <a routerLink="/auth/register" class="btn-primary">Sign up</a>
+        </div>
+
+        <div class="user-menu desktop-only" [class.open]="profileOpen" *ngIf="isLoggedIn">
+            <button type="button" class="icon-btn" aria-haspopup="menu" [attr.aria-expanded]="profileOpen"
+                (click)="toggleProfile()">
+                <i class="fa-solid fa-user"></i>
+                <span class="name">{{ userName }}</span>
+                <i class="fa-solid fa-chevron-down caret"></i>
+            </button>
+
+            <ul class="dropdown" role="menu">
+                <li>
+                    <a routerLink="/account/profile" (click)="closeAll()" role="menuitem">
+                        <i class="fa-solid fa-id-card"></i> My profile
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/account/orders" (click)="closeAll()" role="menuitem">
+                        <i class="fa-solid fa-box"></i> My orders
+                    </a>
+                </li>
+                <li class="sep" aria-hidden="true"></li>
+                <li>
+                    <button type="button" class="linkish" (click)="logout()" role="menuitem">
+                        <i class="fa-solid fa-right-from-bracket"></i> Log out
+                    </button>
+                </li>
+            </ul>
         </div>
 
         <button class="burger" aria-label="Open menu" aria-controls="mobileMenu" [attr.aria-expanded]="menuOpen"
@@ -21,15 +49,37 @@
         </button>
     </header>
 
-    <nav id="mobileMenu" class="mobile" [ngClass]="{open: menuOpen}" *ngIf="menuOpen">
+    <nav id="mobileMenu" class="mobile" [ngClass]="{ open: menuOpen }" *ngIf="menuOpen">
         <a routerLink="/" (click)="closeMenu()" routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact:true}">Home</a>
+            [routerLinkActiveOptions]="{ exact: true }">Home</a>
         <a routerLink="/about" (click)="closeMenu()" routerLinkActive="active">About</a>
         <a routerLink="/contact" (click)="closeMenu()" routerLinkActive="active">Contact</a>
 
-        <div class="mobile-actions">
+        <div class="mobile-actions" *ngIf="!isLoggedIn">
             <a routerLink="/auth/login" (click)="closeMenu()" class="login">Log in</a>
             <a routerLink="/auth/register" (click)="closeMenu()" class="btn-primary block">Sign up</a>
+        </div>
+
+        <div *ngIf="isLoggedIn">
+            <button type="button" class="mobile-acc mb-2" (click)="mobileAccountOpen = !mobileAccountOpen">
+                <i class="fa-solid fa-user"></i>
+                <span class="flex-1">{{ userName }}</span>
+                <i class="fa-solid" [class.fa-chevron-down]="!mobileAccountOpen"
+                    [class.fa-chevron-up]="mobileAccountOpen"></i>
+            </button>
+
+            <div class="mobile-acc-panel" *ngIf="mobileAccountOpen">
+                <a routerLink="/account/profile" (click)="closeMenu()">
+                    <i class="fa-solid fa-id-card"></i> My profile
+                </a>
+                <a routerLink="/account/orders" (click)="closeMenu()">
+                    <i class="fa-solid fa-box"></i> My orders
+                </a>
+            </div>
+
+            <button type="button" class="logout" (click)="logout(); closeMenu()">
+                <i class="fa-solid fa-right-from-bracket"></i> Log out
+            </button>
         </div>
     </nav>
 </section>

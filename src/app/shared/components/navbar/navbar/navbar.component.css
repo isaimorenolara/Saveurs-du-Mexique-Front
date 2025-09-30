@@ -7,12 +7,13 @@
     border: 1px solid #E9ECF6;
     border-radius: 24px;
     box-shadow: 0 10px 30px rgba(15, 18, 32, .08);
-
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
     gap: 18px;
     position: relative;
+    z-index: 30;
+    overflow: visible;
 }
 
 .brand {
@@ -87,8 +88,8 @@
 .burger {
     display: none;
     position: absolute;
-    right: 14px;
-    top: 12px;
+    right: 18px;
+    top: 18px;
     width: 40px;
     height: 40px;
     border: none;
@@ -168,9 +169,186 @@
     margin-top: 6px
 }
 
+.user-menu {
+    justify-self: end;
+    margin-left: auto;
+    position: relative;
+    z-index: 120;
+}
+
+.icon-btn {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(3.9px);
+    -webkit-backdrop-filter: blur(3.9px);
+    border: 1px solid #E9ECF6;
+    border-radius: 12px;
+    padding: .5rem .75rem;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(15, 18, 32, .08);
+    color: #23273a;
+    font-weight: 700;
+}
+
+.icon-btn .name {
+    font-weight: 700;
+}
+
+.icon-btn .caret {
+    font-size: .85em;
+    opacity: .75;
+}
+
+.user-menu .dropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    min-width: 220px;
+    z-index: 1000;
+    list-style: none;
+    margin: 0;
+    padding: .5rem;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(3.9px);
+    -webkit-backdrop-filter: blur(3.9px);
+    border: 1px solid #E9ECF6;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(15, 18, 32, .08);
+    display: none;
+}
+
+.user-menu.open .dropdown {
+    display: block;
+}
+
+.user-menu .dropdown a,
+.user-menu .dropdown .linkish {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    width: 100%;
+    padding: .55rem .6rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #23273a;
+    background: transparent;
+    border: 0;
+    text-align: left;
+    font-weight: 600;
+}
+
+.user-menu .dropdown a:hover,
+.user-menu .dropdown .linkish:hover {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(3.9px);
+    -webkit-backdrop-filter: blur(3.9px);
+    border: 1px solid #E9ECF6;
+}
+
+.user-menu .dropdown .sep {
+    height: 1px;
+    background: #E9ECF6;
+    margin: .35rem 0;
+}
+
+.linkish {
+    cursor: pointer;
+}
+
+.mobile-user {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.mobile-user a,
+.mobile-user .logout {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(3.9px);
+    -webkit-backdrop-filter: blur(3.9px);
+    border: 1px solid #E9ECF6;
+    border-radius: 10px;
+    padding: .6rem .75rem;
+    text-decoration: none;
+    color: #23273a;
+    font-weight: 600;
+    box-shadow: 0 10px 30px rgba(15, 18, 32, .08);
+}
+
+.mobile-user .logout {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.55);
+    color: #23273a;
+    /* color: #b4232c; */
+}
+
+.mobile-acc {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .7rem .8rem;
+    border: 1px solid #E9ECF6;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(3.9px);
+    -webkit-backdrop-filter: blur(3.9px);
+    box-shadow: 0 10px 30px rgba(15, 18, 32, .08);
+    color: #23273a;
+    font-weight: 700;
+}
+
+.mobile-acc-panel {
+    display: grid;
+    gap: 8px;
+    margin: 8px 0 10px;
+}
+
+.mobile-acc-panel a {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .6rem .75rem;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #23273a;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid #E9ECF6;
+    box-shadow: 0 10px 30px rgba(15, 18, 32, .08);
+}
+
+.logout {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .7rem .8rem;
+    border-radius: 10px;
+    border: 1px solid #E9ECF6;
+    background: rgba(255, 255, 255, 0.55);
+    color: #23273a;
+    /* color: #b4232c; */
+    font-weight: 700;
+    box-shadow: 0 10px 30px rgba(15, 18, 32, .08);
+}
+
+.flex-1 {
+    flex: 1 1 auto;
+}
+
 @media (max-width: 992px) {
     .nav-card {
         grid-template-columns: auto 1fr auto
+    }
+
+    .desktop-only {
+        display: none !important;
     }
 
     .links,
