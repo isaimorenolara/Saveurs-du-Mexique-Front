@@ -20,4 +20,4 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: saveursDuMexique/frontEnd:latest
+        tags: saveurs-du-mexique/front-end:latest
