@@ -8,6 +8,7 @@
             <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
             <a routerLink="/about" routerLinkActive="active">About</a>
             <a routerLink="/contact" routerLinkActive="active">Contact</a>
+            <a *ngIf="isLoggedIn && isAdmin" routerLink="/admin/users" routerLinkActive="active">Users</a>
         </nav>
 
         <div class="actions desktop-only" *ngIf="!isLoggedIn">
@@ -54,8 +55,9 @@
             [routerLinkActiveOptions]="{ exact: true }">Home</a>
         <a routerLink="/about" (click)="closeMenu()" routerLinkActive="active">About</a>
         <a routerLink="/contact" (click)="closeMenu()" routerLinkActive="active">Contact</a>
+        <a class="mb-2" *ngIf="isLoggedIn && isAdmin" routerLink="/admin/users" (click)="closeMenu()" routerLinkActive="active">Users</a>
 
-        <div class="mobile-actions" *ngIf="!isLoggedIn">
+        <div class="mobile-actions " *ngIf="!isLoggedIn">
             <a routerLink="/auth/login" (click)="closeMenu()" class="login">Log in</a>
             <a routerLink="/auth/register" (click)="closeMenu()" class="btn-primary block">Sign up</a>
         </div>

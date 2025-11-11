@@ -19,5 +19,10 @@ export const routes: Routes = [
         canMatch: [authGuard],
         loadChildren: () => import('./features/account/account.routes').then(m => m.ACCOUNT_ROUTES),
     },
+    {
+        path: 'admin',
+        canMatch: [authGuard],
+        loadChildren: () => import('./features/admin/admin.routes').then(m => m.ADMIN_ROUTES),
+    },
     { path: '**', redirectTo: '' },
 ];

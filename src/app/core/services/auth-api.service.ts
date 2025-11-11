@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '../../shared/models/auth'; 
+import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, User } from '../../shared/models/auth'; 
 import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class AuthApiService {
     return this.http.post<LoginResponse>(`${this.apiUrl}/sign-in`, request);
   }
 
-  me() {
-    return this.http.get(`${environment.backendUrl}/me`);
+  me(): Observable<User> {
+    return this.http.get<User>(`${environment.backendUrl}/me`);
   }
 }

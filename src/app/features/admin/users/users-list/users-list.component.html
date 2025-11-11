@@ -1,0 +1,80 @@
+<section class="container section">
+    <div class="white-card users">
+        <header class="pp-head animate__animated animate__fadeInDown">
+            <h2 class="pp-title sub-brand m-0"><strong>Users</strong></h2>
+
+            <div class="controls-row">
+                <label class="ctrl-label">Sort by</label>
+
+                <div class="ctrl">
+                    <select class="select" (change)="sortBy.set($any($event.target).value); reload()">
+                        <option value="createdAt" selected>Date</option>
+                        <option value="name">Name</option>
+                    </select>
+                </div>
+
+                <div class="ctrl">
+                    <select class="select" (change)="order.set($any($event.target).value); reload()">
+                        <option value="desc" selected>Desc</option>
+                        <option value="asc">Asc</option>
+                    </select>
+                </div>
+
+                <div class="ctrl">
+                    <select class="select" (change)="pageSize.set(+$any($event.target).value); goTo(1)">
+                        <option value="10" selected>10 / page</option>
+                        <option value="5">5 / page</option>
+                        <option value="20">20 / page</option>
+                        <option value="50">50 / page</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <div class="hero-grid table-section" *ngIf="vm$ | async as vm">
+            <div *ngIf="vm.loading" class="loading">Loading…</div>
+            <div *ngIf="vm.error" class="error">{{ vm.error }}</div>
+            <div class="table-scroll">
+                <table *ngIf="!vm.loading && !vm.error" class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Created</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let u of vm.users">
+                            <td>{{ (u.firstName || '') + ' ' + (u.lastName || '') }}</td>
+                            <td>{{ u.email }}</td>
+                            <td>
+                                <span class="badge" [ngClass]="roleClass(u.role)">{{ u.role }}</span>
+                            </td>
+
+                            <td>{{ u.createdAt | date:'short' }}</td>
+                        </tr>
+                        <tr *ngIf="vm.users.length === 0">
+                            <td class="empty" colspan="4">No results</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <footer *ngIf="vm.pag" class="pagination">
+                <button class="btn ghost" (click)="prev()" [disabled]="!vm.pag.hasPrev" aria-label="Previous page">
+                    <i class="fa-solid fa-arrow-left"></i> Prev
+                </button>
+
+                <span class="page-info">
+                    Page <strong>{{ vm.pag.page }}</strong> of <strong>{{ vm.pag.totalPages }}</strong>
+                </span>
+
+                <button class="btn primary" (click)="next(vm.pag.totalPages)" [disabled]="!vm.pag.hasNext"
+                    aria-label="Next page">
+                    Next <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </footer>
+        </div>
+    </div>
+</section>

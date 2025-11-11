@@ -1,1 +1,48 @@
-<p>profile works!</p>
+<section class="container section">
+    <div class="white-card profile">
+        <header class="pp-head animate__animated animate__fadeInDown">
+            <h2 class="pp-title sub-brand m-0"><strong>My Profile</strong></h2>
+        </header>
+
+        <div class="hero-grid" *ngIf="vm$ | async as vm">
+            <div *ngIf="vm.loading" class="loading">Loading…</div>
+            <div *ngIf="vm.error" class="error">{{ vm.error }}</div>
+
+            <div *ngIf="!vm.loading && !vm.error && vm.user" class="profile-grid">
+                <div class="card-block">
+                    <h3 class="block-title"><i class="fa-solid fa-user me-1"></i> Account</h3>
+                    <div class="row"><span class="label">Name</span><span class="value">
+                            {{ vm.user.firstName || '-' }} {{ vm.user.lastName || '' }}
+                        </span></div>
+                    <div class="row"><span class="label">Email</span><span class="value">{{ vm.user.email }}</span>
+                    </div>
+                    <div class="row"><span class="label">Role</span>
+                        <span class="value">
+                            <span class="badge" [class.badge--admin]="vm.user.role==='admin'"
+                                [class.badge--seller]="vm.user.role==='seller'"
+                                [class.badge--customer]="vm.user.role==='customer'">
+                                {{ vm.user.role }}
+                            </span>
+                        </span>
+                    </div>
+                    <div class="row"><span class="label">Date of birth</span>
+                        <span class="value">{{ vm.user.dob || '-' }}</span>
+                    </div>
+                </div>
+
+                <div class="card-block">
+                    <h3 class="block-title mt"><i class="fa-solid fa-map-location-dot me-1"></i> Address</h3>
+                    <div class="row"><span class="label">Street</span>
+                        <span class="value">{{ vm.user.address?.street || '-' }}</span>
+                    </div>
+                    <div class="row"><span class="label">Number</span>
+                        <span class="value">{{ vm.user.address?.streetNumber || '-' }}</span>
+                    </div>
+                    <div class="row"><span class="label">ZIP</span>
+                        <span class="value">{{ vm.user.address?.zip || '-' }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

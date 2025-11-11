@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { TokenService } from '../../../../core/services/token.service';
+import { UserRole } from '../../../models/auth';
 
 @Component({
   selector: 'app-navbar',
@@ -28,6 +29,10 @@ export class NavbarComponent {
 
   get isLoggedIn(): boolean {
     return this.token.isLoggedIn();
+  }
+
+  get isAdmin(): boolean {
+    return this.token.getUserRole() === UserRole.Admin;
   }
 
   get userName(): string {
